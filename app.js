@@ -27,8 +27,6 @@ app.use(express.static("public"));
 
 //------------------------------------------------------------------------------------
 
-// let posts = [];
-
 mongoose.connect("mongodb://localhost:27017/PostDB",({ useNewUrlParser: true },{ useUnifiedTopology: true }));
 
 const postSchema={
@@ -49,10 +47,7 @@ app.get("/", function(req, res){
         posts: posts
         });
     });
-  
   });
-
-
 
 //------------------------------------------------------------------------------------
 
@@ -75,15 +70,6 @@ app.get("/compose", function(req, res){
 //------------------------------------------------------------------------------------
 
 app.post("/compose", function(req, res){
-  // const post = {
-  //   title: req.body.postTitle,
-  //   content: req.body.postBody
-  // };
-
-  // posts.push(post);
-
-  // res.redirect("/");
-
   const title= req.body.postTitle;
   const content= req.body.postBody;
 
@@ -103,7 +89,6 @@ post.save(function(err){
 //------------------------------------------------------------------------------------
 
 app.get("/posts/:postId", function(req, res){
-  // const requestedTitle = _.lowerCase(req.params.postName);
   const requestedId= req.params.postId;
   console.log(requestedId);
   Post.findOne({_id:requestedId},function(err,foundItem){
